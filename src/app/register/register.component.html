@@ -1,0 +1,45 @@
+<div style="padding-top: 150px;" class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+    <form [formGroup]="registerForm" novalidate (ngSubmit)="onSubmit()">
+        <mat-card style="border-style:ridge;">
+            <mat-card-header>
+                <mat-card-title>Register</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="col">
+                    <div class="row">
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Email" formControlName="email">
+                            <mat-error *ngIf="registerForm.controls['email'].hasError('email')">
+                                Please enter a valid email address
+                            </mat-error>
+                            <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
+                                Email is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="full-width">
+                            <input type="password" matInput placeholder="New password" formControlName="password"
+                                required>
+                            <mat-error *ngIf="registerForm.controls['password'].hasError('required')">
+                                Please enter your new password
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="full-width">
+                            <input type="password" matInput placeholder="Confirm password"
+                                formControlName="confirmPassword" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="registerForm.hasError('notSame')">
+                                Passwords do not match
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" type="submit">Submit</button>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+</div>
