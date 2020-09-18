@@ -36,7 +36,7 @@
                 </div>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-raised-button color="primary" type="submit">Submit</button>
+                <app-add-cancel-btn (onClick)="functioncall($event)" (onClick2)="functioncall2($event)" [label]="label" [label2]="label2"></app-add-cancel-btn>
             </mat-card-actions>
         </mat-card>
     </form>

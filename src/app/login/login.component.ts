@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +11,10 @@ export class LoginComponent {
 
   loginFrom: FormGroup;
   rememberMe: false;
+  label = "Submit";
+  label2 = "Cancel";
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   loginForm = this.fb.group({
     email: [, {
@@ -21,6 +24,14 @@ export class LoginComponent {
     password: [null, Validators.required],
     rememberMe:[false]
   })
+
+  functioncall(event) {
+    console.log('functioncall', event);
+  }
+
+  functioncall2(event) {
+    this.router.navigate([''])
+  }
 
   onSubmit() {
 

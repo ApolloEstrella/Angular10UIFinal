@@ -59,6 +59,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { AddCancelBtnComponent } from './add-cancel-btn/add-cancel-btn.component';
 //import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 //import { RoutingModule } from './routing/routing.module';
 
@@ -82,7 +83,8 @@ const appRoutes: Routes = [
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    AddCancelBtnComponent
   /*  MainNavComponent,
     MainTableComponent,
     MainDashboardComponent,

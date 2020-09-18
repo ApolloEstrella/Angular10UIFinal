@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { Router } from '@angular/router';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -19,12 +20,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class RegisterComponent {
 
   registerFrom: FormGroup;
-
   hasStyle = false;
-
   matcher = new MyErrorStateMatcher();
 
-  constructor(private fb: FormBuilder) { }
+  label = "Submit";
+  label2 = "Cancel";
+
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   registerForm = this.fb.group({
     
@@ -46,6 +48,14 @@ export class RegisterComponent {
     let confirmPass = group.controls.confirmPassword.value;
 
     return pass === confirmPass ? null : { notSame: true }
+  }
+
+  functioncall(event) {
+    console.log('functioncall', event);
+  }
+
+  functioncall2(event) {
+    this.router.navigate([''])
   }
 
   onSubmit() {
