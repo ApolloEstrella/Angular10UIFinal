@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { PersonEffects} from '../app/main-app/person-effects'
 
 //Angular Material Components
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -60,8 +61,13 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AddCancelBtnComponent } from './add-cancel-btn/add-cancel-btn.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
 //import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 //import { RoutingModule } from './routing/routing.module';
+import { PersonReducer} from '../app/main-app/person-reducer'
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -140,7 +146,11 @@ const appRoutes: Routes = [
     LayoutModule,
     MatTreeModule,
     DragDropModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    StoreModule.forRoot({ persons: PersonReducer }),
+    EffectsModule.forRoot([PersonEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+
   ],
   providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
   bootstrap: [AppComponent]

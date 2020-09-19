@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as PersonActions from '../main-app/person-actions'
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,7 @@ export class LoginComponent {
   label = "Submit";
   label2 = "Cancel";
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router, private store: Store) { }
 
   loginForm = this.fb.group({
     email: [, {
@@ -34,6 +36,8 @@ export class LoginComponent {
   }
 
   onSubmit() {
-
+    //alert(this.loginForm.get('email').value)
+    this.store.dispatch(PersonActions.BeginCreatePersonAction({ payload: this.loginForm.get('email').value}));
+    this.router.navigate([''])
   }
 }

@@ -9,7 +9,7 @@
                 <div class="col">
                     <div class="row">
                         <mat-form-field class="full-width">
-                            <input matInput placeholder="Email" formControlName="email">
+                            <input id="email" name="email" matInput placeholder="Email" formControlName="email">
                             <mat-error *ngIf="loginForm.controls['email'].hasError('email')">
                                 Please enter a valid email address
                             </mat-error>
@@ -27,7 +27,7 @@
                         </mat-form-field>
                     </div>
                     <div>
-                        <a routerLink="../forgot-password">Forgot Password</a>
+                        <a style="color:beige;" routerLink="../forgot-password">Forgot Password</a>
                     </div>
                     <br>
                     <div>
