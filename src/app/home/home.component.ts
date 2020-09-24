@@ -1,42 +1,60 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as PersonActions from '../main-app/person-actions'
 import Person from '../main-app/person-model';
 import PersonState from '../main-app/person-state';
+import { LocalService } from '../main-app/local.service';
+import { Router, RouterEvent, NavigationEnd} from '@angular/router';
+//import 'rxjs/add/operator/pairwise';
+//import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
+  @Input()
+  userName: string;
 
-  person$: Observable<PersonState>;
+  /*person$: Observable<PersonState>;
   PersonSubscription: Subscription;
   PersonList: Person[] = [];
   personError: Error = null;
-  loginUser: Person;
+  loginUser: Person; */
 
-  constructor(private store: Store<{ persons: PersonState }>) {
-    this.person$ = store.pipe(select('persons'));
+  private previousUrl: string = undefined;
+  private currentUrl: string = undefined;
+
+  constructor(private storageService: LocalService, private router: Router) {
+    this.currentUrl = this.router.url;
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.previousUrl = this.currentUrl;
+        this.currentUrl = event.url;
+      }
+    });
   }
 
-  ngOnInit() {
-    this.PersonSubscription = this.person$
-      .pipe(
-        map(x => {
-          this.PersonList = x.Persons;
-          this.personError = x.PersonError;
-        })
-      )
-      .subscribe();
+  /*setLocalStorage() {
+    // Set the User data
+    this.localService.setJsonValue('user', this.userName);
+  }
+  getLocalStorage() {
+    // Get the user data
+    this.userName = this.localService.getJsonValue('user');
+  }
+  logoutUser() {
+    // Clear the localStorage
+    this.localService.clearToken();
+  }*/
 
-    if (this.PersonList.length > 0) {
-      this.store.dispatch(PersonActions.BeginGetPersonAction());
-      this.loginUser = this.PersonList[0];
-    }
+  ngOnInit() {
+     //alert(this.storageService.getJsonValue('user'))
+     this.userName = this.storageService.getJsonValue('user')
+      
   }
 
 

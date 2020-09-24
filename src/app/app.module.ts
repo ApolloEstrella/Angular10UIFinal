@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+ 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -67,14 +67,18 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 //import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 //import { RoutingModule } from './routing/routing.module';
-import { PersonReducer} from '../app/main-app/person-reducer'
+import { PersonReducer } from '../app/main-app/person-reducer'
 
-const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+//import { LocalService } from '../app/main-app/local.service'
+import { StorageService } from '../app/main-app/storage.service'
+
+const appRoutes: Routes = [ 
+  { path: '', redirectTo: 'AppComponent', pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent},
-  { path: 'shipping', component: AddressFormComponent }
+  { path: 'shipping', component: AddressFormComponent },
+  { path: 'logout?exit=true', redirectTo: 'AppComponent', pathMatch: 'full' },
   //{ path: 'list', component: MainTableComponent },
   //{ path: 'dashboard', component: MainDashboardComponent },
   //{ path: 'todo', component: MainDragDropComponent },
@@ -103,7 +107,6 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     RouterModule.forRoot(
@@ -152,7 +155,7 @@ const appRoutes: Routes = [
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
 
   ],
-  providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
+  providers: [StorageService, { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

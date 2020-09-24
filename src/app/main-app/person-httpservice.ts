@@ -18,14 +18,15 @@ export class PersonHttpService {
     }
     
     createPersons(payload): Observable<Person> {
-        const data = { "Email": payload}
+        const data = { "Email": payload['email'], "IsLoggedIn": payload['isLoggedIn'], "Password": payload['password'], "RememberMe": payload['rememberMe']}
         const dataSource = of(data);
-        return dataSource     
+        return dataSource    
     }
 
     getPersons(): Observable<Person> {
-        const data = { "Email": "" }
-        const dataSource = of(data);
-        return dataSource 
+        //const data = { "Email": ""}
+        //const dataSource = of(data);
+        return new Observable()
+        
     }
 }
