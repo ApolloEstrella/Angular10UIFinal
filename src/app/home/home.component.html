@@ -11,8 +11,8 @@
             {{userName}}
             <button *ngIf="userName" mat-button routerLink="shipping">Shipping</button>
             <button *ngIf="userName" mat-button routerLink="register">Register</button>
-            <button   mat-button routerLink="login">Log In</button>
-            <button *ngIf="userName"mat-button routerLink="login">Log Out</button>
+            <button *ngIf="!userName"  mat-button routerLink="login">Log In</button>
+            <button *ngIf="userName"mat-button routerLink="logout">Log Out</button>
         </div>
         <button mat-button [mat-menu-trigger-for]="menu" fxShow fxHide.gt-sm>
             <mat-icon>menu</mat-icon>

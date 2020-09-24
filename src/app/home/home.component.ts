@@ -34,8 +34,12 @@ export class HomeComponent {
       if (event instanceof NavigationEnd) {
         this.previousUrl = this.currentUrl;
         this.currentUrl = event.url;
+        if (this.currentUrl === '/logout') {
+          storageService.clearToken();
+          this.userName = ''
+        }
       }
-    });
+    });   
   }
 
   /*setLocalStorage() {

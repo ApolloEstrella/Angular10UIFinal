@@ -69,6 +69,9 @@ export class LoginComponent {
   }); */
 
   onSubmit() {
+    if (this.loginForm.invalid) {
+      return
+    }
     //alert(this.loginForm.get('email').value)
     this.parent['uName'] = this.loginForm.get('email').value
     const x = this.parent['uName']

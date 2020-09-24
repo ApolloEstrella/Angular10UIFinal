@@ -72,13 +72,17 @@ import { PersonReducer } from '../app/main-app/person-reducer'
 //import { LocalService } from '../app/main-app/local.service'
 import { StorageService } from '../app/main-app/storage.service'
 
+import { AuthguardServiceService } from '../app/authguard-service.service'
+
+import { AuthenticationGuard } from './authentication.guard'
+
 const appRoutes: Routes = [ 
   { path: '', redirectTo: 'AppComponent', pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent},
-  { path: 'shipping', component: AddressFormComponent },
-  { path: 'logout?exit=true', redirectTo: 'AppComponent', pathMatch: 'full' },
+  { path: 'shipping', component: AddressFormComponent, canActivate:[AuthenticationGuard]},
+  { path: 'logout', component: LoginComponent },
   //{ path: 'list', component: MainTableComponent },
   //{ path: 'dashboard', component: MainDashboardComponent },
   //{ path: 'todo', component: MainDragDropComponent },
@@ -155,7 +159,7 @@ const appRoutes: Routes = [
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
 
   ],
-  providers: [StorageService, { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
+  providers: [StorageService, AuthguardServiceService, { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
